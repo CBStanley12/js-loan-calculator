@@ -40,6 +40,37 @@ function calculateResults(){
         document.querySelector('#loading').style.display = 'none';
     } else {
         // Show an error message
-        console.log('Error Message');
+        showError('Please check your inputs');
     }
+}
+
+// Show error on invalid input
+function showError(error){
+    // Hide the results and loader
+    document.querySelector('#results').style.display = 'none';
+    document.querySelector('#loading').style.display = 'none';
+
+    // Create a div for the error message
+    const errorDiv = document.createElement('div');
+
+    // Get elements
+    const card = document.querySelector('.card');
+    const heading = document.querySelector('.heading');
+
+    // Add a class to the error message div
+    errorDiv.className = 'alert alert-danger';
+    
+    // Create a text nod and append to div
+    errorDiv.appendChild(document.createTextNode(error));
+
+    // Insert the error message above the heading
+    card.insertBefore(errorDiv, heading);
+
+    // Clear error message after 3 seconds
+    setTimeout(clearError, 4000);
+}
+
+// Clear the error message
+function clearError(){
+    document.querySelector('.alert').remove();
 }
